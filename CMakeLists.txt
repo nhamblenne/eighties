@@ -29,6 +29,10 @@ endif()
 list(INSERT CMAKE_PREFIX_PATH 0 "${CMAKE_INSTALL_PREFIX}")
 
 find_package(Threads)
+
+set(CMAKE_AUTOMOC ON)
+find_package(Qt5Widgets)
+
 add_subdirectory(src)
 
 if(TEST_EIGHTIES OR CMAKE_SOURCE_DIR STREQUAL eighties_SOURCE_DIR)
