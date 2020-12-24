@@ -7,6 +7,8 @@
 #include "eighties/window.hpp"
 #include "window_impl.hpp"
 #include "eighties_app.hpp"
+#include "canvas.hpp"
+#include "scroll_area.hpp"
 
 #include <QMainWindow>
 #include <QCloseEvent>
@@ -30,13 +32,16 @@ window::window(int width, int height)
 window_impl::window_impl(int width, int height)
     : QMainWindow()
 {
-    m_canvas = new QWidget(this);
+    m_canvas = new canvas(this);
     m_canvas->resize(width, height);
-    m_scrollArea = new QScrollArea(this);
+    m_canvas->setMinimumSize(width, height);
+    m_scrollArea = new scroll_area(this);
     m_scrollArea->setBackgroundRole(QPalette::Dark);
     m_scrollArea->setAlignment(Qt::AlignHCenter|Qt::AlignVCenter);
     m_scrollArea->setWidget(m_canvas);
+    m_scrollArea->resize(width, height);
     setCentralWidget(m_scrollArea);
+    resize(m_scrollArea->sizeHint());
     show();
 }
 

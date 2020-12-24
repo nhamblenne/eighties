@@ -8,10 +8,8 @@ int e_main(int argc, char* argv[])
     for (int i = 0; i < argc; ++i) {
         std::cout << "arg " << i << ": " << argv[i] << '\n';
     }
-    eighties::window win(640, 480);
-    eighties::window win2(100, 100);
-    win.wait_for_close();
-    win2.wait_for_close();
+    eighties::window winT(800, 600);
+    winT.wait_for_close();
     return 0;
 }
 

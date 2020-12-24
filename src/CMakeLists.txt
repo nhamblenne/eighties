@@ -1,4 +1,4 @@
-add_library(eighties app.cpp window.cpp window_impl.hpp eighties_app.cpp eighties_app.hpp)
+add_library(eighties app.cpp window.cpp window_impl.hpp eighties_app.cpp eighties_app.hpp canvas.cpp canvas.hpp scroll_area.cpp scroll_area.hpp)
 set_project_warnings(eighties PRIVATE)
 target_include_directories(eighties
         INTERFACE

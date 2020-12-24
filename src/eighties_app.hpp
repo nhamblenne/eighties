@@ -15,14 +15,12 @@ namespace eighties {
 
 class eighties : public QApplication
 {
-Q_OBJECT
+    Q_OBJECT
 public:
     eighties(int& argc, char** argv);
     eighties(eighties const&) = delete;
     eighties& operator=(eighties const&) = delete;
     ~eighties() noexcept override = default;
-
-    void timerEvent(QTimerEvent *event) override;
 
     template<typename F, typename... Ts>
     std::future<void> enqueue(F&&, Ts&&... args);
@@ -30,6 +28,10 @@ public:
     static eighties* instance() {
         return dynamic_cast<eighties*>(QApplication::instance());
     }
+
+protected:
+    void timerEvent(QTimerEvent *event) override;
+
 private:
     std::mutex m_guard;
     std::vector<std::packaged_task<void()>> m_tasks;

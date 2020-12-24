@@ -14,6 +14,8 @@
 
 namespace eighties {
 
+class canvas;
+
 class window_impl : QMainWindow
 {
     Q_OBJECT
@@ -23,16 +25,17 @@ public:
     window_impl& operator=(window_impl const&) = delete;
     ~window_impl() noexcept override = default;
 
-    void closeEvent(QCloseEvent*) override;
-
     void wait_for_close();
+
+protected:
+    void closeEvent(QCloseEvent*) override;
 
 private:
     std::mutex m_guard;
     std::condition_variable m_cond;
     bool m_isClosed{false};
     QScrollArea* m_scrollArea{nullptr};
-    QWidget* m_canvas{nullptr};
+    canvas* m_canvas{nullptr};
 };
 
 }

@@ -18,10 +18,6 @@ int user_thread(int argc, char** argv, int (*wrapped)(int, char**))
 {
     int status = wrapped(argc, argv);
     QApplication::exit(0);
-    // This seems to be needed to ensure that the event loop is not stuck. I'd
-    // like to know a better way.
-    QWidget widget;
-    widget.show();
     return status;
 }
 
