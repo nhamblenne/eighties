@@ -12,6 +12,7 @@
 namespace eighties {
 
 class window_impl;
+class color;
 
 class window
 {
@@ -24,6 +25,11 @@ public:
     void wait_for_close() const;
 
     void resize(int new_width, int new_height);
+
+    void clear();
+    void circle(int xc, int yc, int r, color);
+    void draw_line(int xb, int yb, int xe, int ye, color);
+    void plot(int x, int y, color);
 
 private:
     std::unique_ptr<window_impl> m_impl;

@@ -17,6 +17,7 @@ namespace eighties {
 
 class canvas;
 class scroll_area;
+class color;
 
 class window_impl : QMainWindow
 {
@@ -34,6 +35,7 @@ protected:
     void closeEvent(QCloseEvent*) override;
 
 private:
+    friend class window;
     std::mutex m_guard;
     std::condition_variable m_cond;
     bool m_isClosed{false};
