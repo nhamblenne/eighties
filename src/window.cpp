@@ -36,7 +36,7 @@ window_impl::window_impl(int width, int height)
     m_canvas->resize(width, height);
     m_canvas->setMinimumSize(width, height);
     m_scrollArea = new scroll_area(this);
-    m_scrollArea->setBackgroundRole(QPalette::Dark);
+    m_scrollArea->setBackgroundRole(QPalette::Light);
     m_scrollArea->setAlignment(Qt::AlignHCenter|Qt::AlignVCenter);
     m_scrollArea->setWidget(m_canvas);
     m_scrollArea->resize(width, height);

@@ -13,7 +13,8 @@ namespace eighties {
 canvas::canvas(QWidget* parent)
     : QWidget(parent)
 {
-    //setAttribute(Qt::WA_OpaquePaintEvent);
+    // setAttribute(Qt::WA_OpaquePaintEvent);
+    setBackgroundRole(QPalette::Background);
 }
 
 QSize canvas::sizeHint() const
@@ -29,10 +30,10 @@ QSize canvas::minimumSizeHint() const
 void canvas::paintEvent(QPaintEvent*)
 {
     QPainter painter{this};
-    painter.drawLine(1, 1, size().width()-1, 1);
-    painter.drawLine(1, 1, 1, size().height()-1);
-    painter.drawLine(1, size().height()-1, size().width()-1, size().height()-1);
-    painter.drawLine(size().width()-1, 1, size().width()-1, size().height()-1);
+    painter.drawLine(1, 1, size().width()-2, 1);
+    painter.drawLine(1, 1, 1, size().height()-2);
+    painter.drawLine(1, size().height()-1, size().width()-2, size().height()-2);
+    painter.drawLine(size().width()-1, 1, size().width()-2, size().height()-2);
 }
 
 }
