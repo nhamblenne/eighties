@@ -56,7 +56,7 @@ void canvas::do_clear()
     update();
 }
 
-void canvas::do_circle(int xc, int yc, int r, color col)
+void canvas::do_draw_circle(int xc, int yc, int r, color col)
 {
     QPainter painter(&m_content);
     painter.setPen(toQColor(col));
@@ -72,7 +72,7 @@ void canvas::do_draw_line(int xb, int yb, int xe, int ye, color col)
     update(xb, yb, xe-xb, ye-yb);
 }
 
-void canvas::do_plot(int x, int y, color col)
+void canvas::do_draw_point(int x, int y, color col)
 {
     QPainter painter(&m_content);
     painter.setPen(toQColor(col));

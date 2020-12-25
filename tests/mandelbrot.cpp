@@ -42,9 +42,11 @@ int emain(int, char*[])
                 z = z*z + z0;
             }
             if (c == 0)
-                win.plot(j, i, eighties::color::white);
+                win.draw_point(j, i, eighties::color::white);
             else
-                win.plot(j, i, eighties::color(c/16/16*16, c/16%16*16, c%16*16));
+                win.draw_point(j, i, eighties::color(c / 16 / 16 * 16,
+                                                     c / 16 % 16 * 16,
+                                                     c % 16 * 16));
         }
     }
     win.wait_for_close();

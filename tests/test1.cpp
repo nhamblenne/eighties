@@ -18,7 +18,7 @@ int emain(int argc, char* argv[])
     winT.resize(200, 150);
     winT.resize(640, 480);
     winT.draw_line(0, 0, 639, 479, eighties::color::blue);
-    winT.circle(200, 200, 150, eighties::color::red);
+    winT.draw_circle(200, 200, 150, eighties::color::red);
     winT.draw_line(200-150, 200-150, 200+150, 200-150, eighties::color::green);
     winT.draw_line(200-150, 200-150, 200-150, 200+150, eighties::color::green);
     winT.draw_line(200+150, 200-150, 200+150, 200+150, eighties::color::green);

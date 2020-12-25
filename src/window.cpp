@@ -84,9 +84,9 @@ void window::clear()
     forward(m_impl->m_canvas, &canvas::do_clear);
 }
 
-void window::circle(int xc, int yc, int r, color col)
+void window::draw_circle(int xc, int yc, int r, color col)
 {
-    forward(m_impl->m_canvas, &canvas::do_circle, xc, yc, r, col);
+    forward(m_impl->m_canvas, &canvas::do_draw_circle, xc, yc, r, col);
 }
 
 void window::draw_line(int xb, int yb, int xe, int ye, color col)
@@ -94,9 +94,9 @@ void window::draw_line(int xb, int yb, int xe, int ye, color col)
     forward(m_impl->m_canvas, &canvas::do_draw_line, xb, yb, xe, ye, col);
 }
 
-void window::plot(int x, int y, color col)
+void window::draw_point(int x, int y, color col)
 {
-    forward(m_impl->m_canvas, &canvas::do_plot, x, y, col);
+    forward(m_impl->m_canvas, &canvas::do_draw_point, x, y, col);
 }
 
 void window_impl::closeEvent(QCloseEvent* event)
