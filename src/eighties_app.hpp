@@ -2,7 +2,7 @@
 #define EIGHTIES_EIGHTIES_APP_HPP
 
 /* =======================================================================
- * eighties_app.hpp.h
+ * eighties_app.hpp
  * Copyright (c) 2020 Nicolas Ivan Hamblenne
  * =======================================================================
  */

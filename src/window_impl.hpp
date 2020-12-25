@@ -2,7 +2,7 @@
 #define EIGHTIES_WINDOW_IMPL_HPP
 
 /* =======================================================================
- * window_impl.hpp.h
+ * window_impl.hpp
  * Copyright (c) 2020 Nicolas Ivan Hamblenne
  * =======================================================================
  */

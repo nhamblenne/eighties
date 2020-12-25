@@ -1,12 +1,10 @@
 /* =======================================================================
- * eighties_app.cpp.c
+ * eighties_app.cpp
  * Copyright (c) 2020 Nicolas Ivan Hamblenne
  * =======================================================================
  */
 
 #include "eighties_app.hpp"
-
-#include <iostream>
 
 namespace eighties {
 

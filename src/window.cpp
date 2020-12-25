@@ -1,19 +1,19 @@
 /* =======================================================================
- * window.cpp.c
+ * window.cpp
  * Copyright (c) 2020 Nicolas Ivan Hamblenne
  * =======================================================================
  */
 
 #include "eighties/window.hpp"
-#include <eighties/color.hpp>
 #include "window_impl.hpp"
+
+#include "eighties/color.hpp"
 #include "eighties_app.hpp"
 #include "canvas.hpp"
-
 #include "scroll_area.hpp"
+
 #include <QMainWindow>
 #include <QCloseEvent>
-#include <iostream>
 
 namespace {
 

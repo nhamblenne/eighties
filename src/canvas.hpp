@@ -1,11 +1,11 @@
+#ifndef EIGHTIES_CANVAS_HPP
+#define EIGHTIES_CANVAS_HPP
+
 /* =======================================================================
- * canvas.hpp.h
+ * canvas.hpp
  * Copyright (c) 2020 Nicolas Ivan Hamblenne
  * =======================================================================
  */
-
-#ifndef EIGHTIES_CANVAS_HPP
-#define EIGHTIES_CANVAS_HPP
 
 #include <QWidget>
 #include <QImage>
@@ -38,4 +38,4 @@ private:
 
 }
 
-#endif //EIGHTIES_CANVAS_HPP
+#endif

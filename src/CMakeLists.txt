@@ -1,3 +1,8 @@
+#######################################################################
+# CMakeLists.txt
+# Copyright (c) 2020 Nicolas Ivan Hamblenne
+#######################################################################
+
 add_library(eighties_s STATIC main.cpp)
 set_project_warnings(eighties_s PRIVATE)
 target_include_directories(eighties_s

@@ -1,11 +1,11 @@
+#ifndef EIGHTIES_SCROLL_AREA_HPP
+#define EIGHTIES_SCROLL_AREA_HPP
+
 /* =======================================================================
- * scroll_area.hpp.h
+ * scroll_area.hpp
  * Copyright (c) 2020 Nicolas Ivan Hamblenne
  * =======================================================================
  */
-
-#ifndef EIGHTIES_SCROLL_AREA_HPP
-#define EIGHTIES_SCROLL_AREA_HPP
 
 #include <QScrollArea>
 
@@ -25,4 +25,4 @@ public:
 
 }
 
-#endif //EIGHTIES_SCROLL_AREA_HPP
+#endif

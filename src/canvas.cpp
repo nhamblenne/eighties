@@ -1,10 +1,11 @@
 /* =======================================================================
- * canvas.cpp.cc
+ * canvas.cpp
  * Copyright (c) 2020 Nicolas Ivan Hamblenne
  * =======================================================================
  */
 
 #include "canvas.hpp"
+
 #include "eighties/color.hpp"
 
 #include <QPainter>
