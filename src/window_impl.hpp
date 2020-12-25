@@ -8,13 +8,15 @@
  */
 
 #include <QMainWindow>
-#include <QScrollArea>
 #include <mutex>
 #include <condition_variable>
+
+class QScrollArea;
 
 namespace eighties {
 
 class canvas;
+class scroll_area;
 
 class window_impl : QMainWindow
 {
@@ -26,6 +28,7 @@ public:
     ~window_impl() noexcept override = default;
 
     void wait_for_close();
+    void do_resize(int new_width, int new_height);
 
 protected:
     void closeEvent(QCloseEvent*) override;
@@ -34,7 +37,7 @@ private:
     std::mutex m_guard;
     std::condition_variable m_cond;
     bool m_isClosed{false};
-    QScrollArea* m_scrollArea{nullptr};
+    scroll_area* m_scrollArea{nullptr};
     canvas* m_canvas{nullptr};
 };
 

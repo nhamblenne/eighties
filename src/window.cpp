@@ -32,14 +32,11 @@ window::window(int width, int height)
 window_impl::window_impl(int width, int height)
     : QMainWindow()
 {
-    m_canvas = new canvas(this);
-    m_canvas->resize(width, height);
-    m_canvas->setMinimumSize(width, height);
+    m_canvas = new canvas(this, width, height);
     m_scrollArea = new scroll_area(this);
     m_scrollArea->setBackgroundRole(QPalette::Light);
     m_scrollArea->setAlignment(Qt::AlignHCenter|Qt::AlignVCenter);
     m_scrollArea->setWidget(m_canvas);
-    m_scrollArea->resize(width, height);
     setCentralWidget(m_scrollArea);
     resize(m_scrollArea->sizeHint());
     show();
@@ -54,6 +51,21 @@ void window_impl::wait_for_close()
 {
     std::unique_lock guard(m_guard);
     m_cond.wait(guard, [this]{return m_isClosed;});
+}
+
+void window::resize(int new_width, int new_height)
+{
+    eighties::instance()->enqueue
+        ([=]()
+         {
+             m_impl->do_resize(new_width, new_height);
+         }).get();
+}
+
+void window_impl::do_resize(int new_width, int new_height)
+{
+    m_canvas->resize(new_width, new_height);
+    resize(m_scrollArea->sizeHint());
 }
 
 void window_impl::closeEvent(QCloseEvent* event)

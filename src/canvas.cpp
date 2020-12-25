@@ -7,33 +7,36 @@
 #include "canvas.hpp"
 
 #include <QPainter>
+#include <QPaintEvent>
 
 namespace eighties {
 
-canvas::canvas(QWidget* parent)
-    : QWidget(parent)
+canvas::canvas(QWidget* parent, int width, int height)
+    : QWidget(parent),
+      m_content(width, height, QImage::Format_RGB32)
 {
-    // setAttribute(Qt::WA_OpaquePaintEvent);
+    setAttribute(Qt::WA_OpaquePaintEvent);
     setBackgroundRole(QPalette::Background);
+    resize(width, height);
+    m_content.fill(QColor(255, 255, 255));
 }
 
-QSize canvas::sizeHint() const
+void canvas::paintEvent(QPaintEvent* event)
 {
-    return size();
+    QPainter painter(this);
+    QRect dirtyRect = event->rect();
+    painter.drawImage(dirtyRect, m_content, dirtyRect);
 }
 
-QSize canvas::minimumSizeHint() const
+void canvas::resizeEvent(QResizeEvent* event)
 {
-    return size();
-}
-
-void canvas::paintEvent(QPaintEvent*)
-{
-    QPainter painter{this};
-    painter.drawLine(1, 1, size().width()-2, 1);
-    painter.drawLine(1, 1, 1, size().height()-2);
-    painter.drawLine(1, size().height()-1, size().width()-2, size().height()-2);
-    painter.drawLine(size().width()-1, 1, size().width()-2, size().height()-2);
+    QImage newImage(size(), QImage::Format_RGB32);
+    newImage.fill(QColor(255, 255, 255));
+    QPainter painter(&newImage);
+    painter.drawImage(QPoint(0, 0), m_content);
+    m_content = newImage;
+    QWidget::resizeEvent(event);
+    update();
 }
 
 }

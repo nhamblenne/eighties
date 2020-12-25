@@ -22,6 +22,9 @@ public:
     ~window();
 
     void wait_for_close() const;
+
+    void resize(int new_width, int new_height);
+
 private:
     std::unique_ptr<window_impl> m_impl;
 };
