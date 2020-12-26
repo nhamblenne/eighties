@@ -8,7 +8,6 @@
 #include <eighties/color.hpp>
 
 #include <complex>
-#include <iostream>
 
 int emain(int, char*[])
 {
@@ -30,7 +29,6 @@ int emain(int, char*[])
         xmin = xc - dx * (win_size-1) / 2.0;
         xmax = xc + dx * (win_size-1) / 2.0;
     }
-    std::cout << xmin << ":" << ymin << " " << xmax << ":" << ymax << '\n';
     eighties::window win(win_size, win_size);
     for (int i = 0; i < win_size; ++i) {
         double y0 = ymin + i*dy;
@@ -44,9 +42,10 @@ int emain(int, char*[])
             if (c == 0)
                 win.draw_point(j, i, eighties::color::white);
             else
-                win.draw_point(j, i, eighties::color(c / 16 / 16 * 16,
-                                                     c / 16 % 16 * 16,
-                                                     c % 16 * 16));
+                win.draw_point(j, i,
+                               eighties::color(c / 16 / 16 * 16,
+                                               c / 16 % 16 * 16,
+                                               c % 16 * 16));
         }
     }
     win.wait_for_close();

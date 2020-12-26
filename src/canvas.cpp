@@ -69,7 +69,7 @@ void canvas::do_draw_line(int xb, int yb, int xe, int ye, color col)
     QPainter painter(&m_content);
     painter.setPen(toQColor(col));
     painter.drawLine(xb, yb, xe, ye);
-    update(xb, yb, xe-xb, ye-yb);
+    update(xb, yb, xe-xb+1, ye-yb+1);
 }
 
 void canvas::do_draw_point(int x, int y, color col)
