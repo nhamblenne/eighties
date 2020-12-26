@@ -7,10 +7,13 @@
 #include "canvas.hpp"
 
 #include "eighties/color.hpp"
+#include "eighties/point.hpp"
+
 #include "image_impl.hpp"
 
 #include <QPainter>
 #include <QPaintEvent>
+#include <QWindow>
 
 namespace {
 
@@ -88,6 +91,21 @@ void canvas::do_draw_image(int x, int y, image const& im)
     painter.drawImage(QPoint(x, y), get_impl(im)->get_image(),
                       QRect(QPoint(0, 0), image_size));
     update(QRect(QPoint(x, y), image_size));
+}
+
+point canvas::do_current_cursor_position() const
+{
+    QWindow* win = window()->windowHandle();
+    if (win == nullptr) {
+        return { -1, -1 };
+    }
+    QScreen* scr = win->screen();
+    if (scr == nullptr) {
+        return { -1, -1 };
+    }
+    QPoint pos = QCursor::pos(scr);
+    pos = mapFromGlobal(pos);
+    return { pos.x(), pos.y() };
 }
 
 }

@@ -18,6 +18,7 @@ namespace eighties {
 class canvas;
 class scroll_area;
 class color;
+class point;
 
 class window_impl : QMainWindow
 {

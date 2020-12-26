@@ -14,6 +14,7 @@ namespace eighties {
 class window_impl;
 class color;
 class image;
+class point;
 
 class window
 {
@@ -32,6 +33,8 @@ public:
     void draw_line(int xb, int yb, int xe, int ye, color);
     void draw_point(int x, int y, color);
     void draw_image(int x, int y, image const&);
+
+    point current_cursor_position() const;
 
 private:
     std::unique_ptr<window_impl> m_impl;

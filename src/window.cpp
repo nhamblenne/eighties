@@ -8,6 +8,7 @@
 #include "window_impl.hpp"
 
 #include "eighties/color.hpp"
+#include "eighties/point.hpp"
 #include "eighties_app.hpp"
 #include "canvas.hpp"
 #include "scroll_area.hpp"
@@ -102,6 +103,17 @@ void window::draw_point(int x, int y, color col)
 void window::draw_image(int x, int y, image const& im)
 {
     forward(m_impl->m_canvas, &canvas::do_draw_image, x, y, im);
+}
+
+point window::current_cursor_position() const
+{
+    point result{ -1, -1 };
+    eighties::eighties::instance()->enqueue
+        ([&]()
+         {
+             result = m_impl->m_canvas->do_current_cursor_position();
+         }).get();
+    return result;
 }
 
 void window_impl::closeEvent(QCloseEvent* event)

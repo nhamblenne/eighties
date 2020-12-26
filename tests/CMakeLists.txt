@@ -15,3 +15,6 @@ target_link_libraries(mandelbrot-par eighties_s eighties)
 add_executable(test-image test-image.cpp)
 target_link_libraries(test-image eighties_s eighties)
 
+add_executable(test-position test-position.cpp)
+target_link_libraries(test-position eighties_s eighties)
+
