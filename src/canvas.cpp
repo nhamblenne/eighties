@@ -7,6 +7,7 @@
 #include "canvas.hpp"
 
 #include "eighties/color.hpp"
+#include "image_impl.hpp"
 
 #include <QPainter>
 #include <QPaintEvent>
@@ -78,6 +79,15 @@ void canvas::do_draw_point(int x, int y, color col)
     painter.setPen(toQColor(col));
     painter.drawPoint(x, y);
     update(x, y, 1, 1);
+}
+
+void canvas::do_draw_image(int x, int y, image const& im)
+{
+    QPainter painter(&m_content);
+    auto image_size = get_impl(im)->get_image().size();
+    painter.drawImage(QPoint(x, y), get_impl(im)->get_image(),
+                      QRect(QPoint(0, 0), image_size));
+    update(QRect(QPoint(x, y), image_size));
 }
 
 }

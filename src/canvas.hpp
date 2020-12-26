@@ -13,6 +13,7 @@
 namespace eighties {
 
 class color;
+class image;
 
 class canvas : public QWidget
 {
@@ -27,6 +28,7 @@ public:
     void do_draw_circle(int xc, int yc, int r, color);
     void do_draw_line(int xb, int yb, int xe, int ye, color);
     void do_draw_point(int x, int y, color);
+    void do_draw_image(int x, int y, image const&);
 
 protected:
     void paintEvent(QPaintEvent*) override;

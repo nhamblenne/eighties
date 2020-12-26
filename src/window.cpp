@@ -18,12 +18,12 @@
 namespace {
 
 template <typename T, typename M, typename... Ps>
-void forward(T* c, M fn, Ps... params)
+void forward(T* c, M fn, Ps&&... params)
 {
     eighties::eighties::instance()->enqueue
-        ([=]()
+        ([&]()
          {
-             (c->*fn)(params...);
+             (c->*fn)(std::forward<Ps>(params)...);
          }).get();
 }
 
@@ -97,6 +97,11 @@ void window::draw_line(int xb, int yb, int xe, int ye, color col)
 void window::draw_point(int x, int y, color col)
 {
     forward(m_impl->m_canvas, &canvas::do_draw_point, x, y, col);
+}
+
+void window::draw_image(int x, int y, image const& im)
+{
+    forward(m_impl->m_canvas, &canvas::do_draw_image, x, y, im);
 }
 
 void window_impl::closeEvent(QCloseEvent* event)
