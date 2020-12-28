@@ -19,6 +19,7 @@ class point;
 class window
 {
 public:
+    enum status_type { opened, hidden, closed };
     window(int width, int height);
     window(window&&) noexcept;
     window& operator=(window&&) noexcept;
@@ -27,6 +28,9 @@ public:
     void wait_for_close() const;
 
     void resize(int new_width, int new_height);
+    void hide();
+    void show();
+    void close();
 
     void clear();
     void draw_circle(int xc, int yc, int r, color);
@@ -34,6 +38,7 @@ public:
     void draw_point(int x, int y, color);
     void draw_image(int x, int y, image const&);
 
+    status_type status() const;
     point current_cursor_position() const;
 
 private:

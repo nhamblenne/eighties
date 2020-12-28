@@ -48,6 +48,5 @@ int emain(int, char*[])
                                                c % 16 * 16));
         }
     }
-    win.wait_for_close();
     return 0;
 }

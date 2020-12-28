@@ -34,7 +34,10 @@ namespace eighties {
 
 window::window(window&&) noexcept = default;
 window& window::operator=(window&&) noexcept = default;
-window::~window() = default;
+window::~window()
+{
+    wait_for_close();
+}
 
 window::window(int width, int height)
 {
@@ -48,6 +51,7 @@ window::window(int width, int height)
 window_impl::window_impl(int width, int height)
     : QMainWindow()
 {
+    setAttribute(Qt::WA_QuitOnClose, false);
     m_canvas = new canvas(this, width, height);
     m_scrollArea = new scroll_area(this);
     m_scrollArea->setBackgroundRole(QPalette::Midlight);
@@ -58,6 +62,11 @@ window_impl::window_impl(int width, int height)
     show();
 }
 
+window_impl::~window_impl() noexcept
+{
+}
+
+
 void window::wait_for_close() const
 {
     m_impl->wait_for_close();
@@ -66,7 +75,7 @@ void window::wait_for_close() const
 void window_impl::wait_for_close()
 {
     std::unique_lock guard(m_guard);
-    m_cond.wait(guard, [this]{return m_isClosed;});
+    m_cond.wait(guard, [this]{return m_is_closed;});
 }
 
 void window::resize(int new_width, int new_height)
@@ -78,6 +87,38 @@ void window_impl::do_resize(int new_width, int new_height)
 {
     m_canvas->resize(new_width, new_height);
     resize(m_scrollArea->sizeHint());
+}
+
+void window::hide()
+{
+    forward(m_impl.get(), &window_impl::do_hide);
+}
+
+void window_impl::do_hide()
+{
+    hide();
+}
+
+void window::show()
+{
+    forward(m_impl.get(), &window_impl::do_show);
+}
+
+void window_impl::do_show()
+{
+    if (!m_is_closed) {
+        show();
+    }
+}
+
+void window::close()
+{
+    forward(m_impl.get(), &window_impl::do_close);
+}
+
+void window_impl::do_close()
+{
+    close();
 }
 
 void window::clear()
@@ -105,6 +146,21 @@ void window::draw_image(int x, int y, image const& im)
     forward(m_impl->m_canvas, &canvas::do_draw_image, x, y, im);
 }
 
+window::status_type window::status() const
+{
+    return m_impl->status();
+}
+
+window::status_type window_impl::status() const
+{
+    std::unique_lock guard(m_guard);
+    if (m_is_closed) {
+        return window::closed;
+    } else {
+        return window::opened;
+    }
+}
+
 point window::current_cursor_position() const
 {
     point result{ -1, -1 };
@@ -120,7 +176,7 @@ void window_impl::closeEvent(QCloseEvent* event)
 {
     event->accept();
     std::unique_lock guard(m_guard);
-    m_isClosed = true;
+    m_is_closed = true;
     m_cond.notify_all();
 }
 

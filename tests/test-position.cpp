@@ -15,7 +15,7 @@ int emain(int, char**)
     eighties::image dino("./dino.png");
 
     eighties::point old_pos{-1, -1};
-    for (;;) {
+    while (win.status() != eighties::window::closed) {
         auto pos = win.current_cursor_position();
         if ((pos != old_pos)
             && (0 <= pos.x && pos.x < 640)
@@ -26,6 +26,5 @@ int emain(int, char**)
             old_pos = pos;
         }
     }
-
     return 0;
 }

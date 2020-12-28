@@ -7,6 +7,8 @@
  * =======================================================================
  */
 
+#include "eighties/window.hpp"
+
 #include <QMainWindow>
 #include <mutex>
 #include <condition_variable>
@@ -27,19 +29,24 @@ public:
     window_impl(int width, int height);
     window_impl(window_impl const&) = delete;
     window_impl& operator=(window_impl const&) = delete;
-    ~window_impl() noexcept override = default;
+    ~window_impl() noexcept override;
 
     void wait_for_close();
     void do_resize(int new_width, int new_height);
+    void do_hide();
+    void do_show();
+    void do_close();
+
+    window::status_type status() const;
 
 protected:
     void closeEvent(QCloseEvent*) override;
 
 private:
     friend class window;
-    std::mutex m_guard;
+    mutable std::mutex m_guard;
     std::condition_variable m_cond;
-    bool m_isClosed{false};
+    bool m_is_closed{false};
     scroll_area* m_scrollArea{nullptr};
     canvas* m_canvas{nullptr};
 };
