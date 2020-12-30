@@ -26,7 +26,8 @@ public:
     int height() const;
 
 private:
-    friend image_impl* get_impl(image const&);
+    explicit image(std::unique_ptr<image_impl>&&) noexcept;
+    friend class image_impl;
     std::unique_ptr<image_impl> m_impl;
 };
 

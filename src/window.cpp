@@ -9,8 +9,10 @@
 
 #include "eighties/color.hpp"
 #include "eighties/point.hpp"
+#include "eighties/image.hpp"
 #include "eighties_app.hpp"
 #include "canvas.hpp"
+#include "image_impl.hpp"
 #include "scroll_area.hpp"
 
 #include <QMainWindow>
@@ -161,7 +163,7 @@ window::status_type window_impl::status() const
 point window::current_cursor_position() const
 {
     point result{ -1, -1 };
-    app::app::instance()->enqueue
+    app::instance()->enqueue
         ([&]()
          {
              result = m_impl->m_canvas->do_current_cursor_position();
@@ -177,6 +179,17 @@ event window::get_event(bool wait)
 event window::get_event(std::string& text, bool wait)
 {
     return m_impl->m_canvas->do_get_event(text, wait);
+}
+
+image window::get_image() const
+{
+    image result = image_impl::create_image();
+    app::instance()->enqueue
+        ([&]()
+         {
+             m_impl->m_canvas->do_get_image(result);
+         }).get();
+    return result;
 }
 
 void window_impl::closeEvent(QCloseEvent* event)

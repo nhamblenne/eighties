@@ -23,6 +23,16 @@ image_impl::image_impl(const std::string& file_name)
 {
 }
 
+image_impl::image_impl(QImage&& im)
+    : m_image(std::move(im))
+{
+}
+
+image::image(std::unique_ptr<image_impl>&& impl) noexcept
+    : m_impl(std::move(impl))
+{
+}
+
 int image::width() const
 {
     return m_impl->get_image().width();
@@ -37,5 +47,16 @@ QImage const& image_impl::get_image() const
 {
     return m_image;
 }
+
+image image_impl::create_image()
+{
+    return image(std::unique_ptr<image_impl>());
+}
+
+image image_impl::create_image(QImage&& im)
+{
+    return image(std::make_unique<image_impl>(std::move(im)));
+}
+
 
 }

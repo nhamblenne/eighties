@@ -44,6 +44,8 @@ public:
     event get_event(bool wait = false);
     event get_event(std::string& text, bool wait = false);
 
+    image get_image() const;
+
 private:
     std::unique_ptr<window_impl> m_impl;
 };

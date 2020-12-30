@@ -251,8 +251,8 @@ void canvas::do_draw_point(int x, int y, color col)
 void canvas::do_draw_image(int x, int y, image const& im)
 {
     QPainter painter(&m_content);
-    auto image_size = get_impl(im)->get_image().size();
-    painter.drawImage(QPoint(x, y), get_impl(im)->get_image(),
+    auto image_size = image_impl::get_impl(im)->get_image().size();
+    painter.drawImage(QPoint(x, y), image_impl::get_impl(im)->get_image(),
                       QRect(QPoint(0, 0), image_size));
     update(QRect(QPoint(x, y), image_size));
 }
@@ -309,6 +309,11 @@ eighties::event canvas::do_get_event(std::string& text, bool wait)
         }
         return result;
     }
+}
+
+void canvas::do_get_image(image& result) const
+{
+    result = image_impl::create_image(m_content.copy());
 }
 
 void canvas::paintEvent(QPaintEvent* event)

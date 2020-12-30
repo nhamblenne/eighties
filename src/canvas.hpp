@@ -39,6 +39,7 @@ public:
     point do_current_cursor_position() const;
     eighties::event do_get_event(bool wait);
     eighties::event do_get_event(std::string&, bool wait);
+    void do_get_image(image&) const;
 
 public:
     QVariant inputMethodQuery(Qt::InputMethodQuery query) const override;
