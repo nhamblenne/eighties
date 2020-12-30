@@ -13,20 +13,20 @@
 
 namespace eighties {
 
-class eighties : public QApplication
+class app : public QApplication
 {
     Q_OBJECT
 public:
-    eighties(int& argc, char** argv);
-    eighties(eighties const&) = delete;
-    eighties& operator=(eighties const&) = delete;
-    ~eighties() noexcept override = default;
+    app(int& argc, char** argv);
+    app(app const&) = delete;
+    app& operator=(app const&) = delete;
+    ~app() noexcept override = default;
 
     template<typename F, typename... Ts>
     std::future<void> enqueue(F&&, Ts&&... args);
 
-    static eighties* instance() {
-        return dynamic_cast<eighties*>(QApplication::instance());
+    static app* instance() {
+        return dynamic_cast<app*>(QApplication::instance());
     }
 
 protected:
@@ -38,7 +38,7 @@ private:
 };
 
 template<typename F, typename... Ts>
-std::future<void> eighties::enqueue(F&& fn, Ts&&... args)
+std::future<void> app::enqueue(F&& fn, Ts&&... args)
 {
     std::lock_guard guard(m_guard);
     std::packaged_task<void()> task([&](){ return fn(std::forward<Ts>(args)...);});

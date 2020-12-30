@@ -21,7 +21,7 @@ namespace {
 template <typename T, typename M, typename... Ps>
 void forward(T* c, M fn, Ps&&... params)
 {
-    eighties::eighties::instance()->enqueue
+    eighties::app::instance()->enqueue
         ([&]()
          {
              (c->*fn)(std::forward<Ps>(params)...);
@@ -41,7 +41,7 @@ window::~window()
 
 window::window(int width, int height)
 {
-    eighties::instance()->enqueue
+    app::instance()->enqueue
         ([=]()
          {
              m_impl = std::make_unique<window_impl>(width, height);
@@ -62,10 +62,7 @@ window_impl::window_impl(int width, int height)
     show();
 }
 
-window_impl::~window_impl() noexcept
-{
-}
-
+window_impl::~window_impl() noexcept = default;
 
 void window::wait_for_close() const
 {
@@ -106,7 +103,7 @@ void window::show()
 
 void window_impl::do_show()
 {
-    if (!m_is_closed) {
+    if (status() == window::closed) {
         show();
     }
 }
@@ -164,12 +161,17 @@ window::status_type window_impl::status() const
 point window::current_cursor_position() const
 {
     point result{ -1, -1 };
-    eighties::eighties::instance()->enqueue
+    app::app::instance()->enqueue
         ([&]()
          {
              result = m_impl->m_canvas->do_current_cursor_position();
          }).get();
     return result;
+}
+
+event window::get_event(bool wait)
+{
+    return m_impl->m_canvas->do_get_event(wait);
 }
 
 void window_impl::closeEvent(QCloseEvent* event)

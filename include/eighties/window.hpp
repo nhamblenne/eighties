@@ -15,6 +15,7 @@ class window_impl;
 class color;
 class image;
 class point;
+class event;
 
 class window
 {
@@ -40,6 +41,7 @@ public:
 
     status_type status() const;
     point current_cursor_position() const;
+    event get_event(bool wait = false);
 
 private:
     std::unique_ptr<window_impl> m_impl;

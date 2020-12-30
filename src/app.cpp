@@ -23,7 +23,7 @@ int user_thread(int argc, char** argv, int (*wrapped)(int, char**))
 
 int main(int argc, char* argv[], int (*wrapped)(int, char**))
 {
-    eighties app{argc, argv};
+    app app{argc, argv};
     auto future = std::async(std::launch::async, user_thread, argc, argv, wrapped);
     QApplication::exec();
     return future.get();

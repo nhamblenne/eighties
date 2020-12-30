@@ -21,6 +21,7 @@ class canvas;
 class scroll_area;
 class color;
 class point;
+struct event;
 
 class window_impl : QMainWindow
 {

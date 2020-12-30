@@ -8,13 +8,13 @@
 
 namespace eighties {
 
-eighties::eighties(int& argc, char** argv)
+app::app(int& argc, char** argv)
     : QApplication(argc, argv)
 {
     startTimer(0);
 }
 
-void eighties::timerEvent(QTimerEvent*)
+void app::timerEvent(QTimerEvent*)
 {
     for (size_t i = 0;; ++i) {
         std::lock_guard guard(m_guard);

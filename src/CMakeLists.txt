@@ -9,7 +9,9 @@ target_include_directories(eighties_s
         PRIVATE
             ${PROJECT_SOURCE_DIR}/include)
 
-add_library(eighties app.cpp window.cpp window_impl.hpp eighties_app.cpp eighties_app.hpp canvas.cpp canvas.hpp scroll_area.cpp scroll_area.hpp ../include/eighties/color.hpp ../include/eighties/image.hpp image.cpp image_impl.hpp ../include/eighties/point.hpp)
+add_library(eighties app.cpp window.cpp window_impl.hpp eighties_app.cpp
+        eighties_app.hpp canvas.cpp canvas.hpp scroll_area.cpp scroll_area.hpp
+        image.cpp image_impl.hpp event.cpp)
 set_project_warnings(eighties PRIVATE)
 set_target_properties(eighties PROPERTIES
         AUTOMOC ON)
