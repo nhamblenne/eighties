@@ -174,6 +174,11 @@ event window::get_event(bool wait)
     return m_impl->m_canvas->do_get_event(wait);
 }
 
+event window::get_event(std::string& text, bool wait)
+{
+    return m_impl->m_canvas->do_get_event(text, wait);
+}
+
 void window_impl::closeEvent(QCloseEvent* event)
 {
     event->accept();

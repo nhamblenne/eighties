@@ -283,6 +283,30 @@ eighties::event canvas::do_get_event(bool wait)
     } else {
         auto result = m_events.front();
         m_events.pop_front();
+        if (result.type == event_type::key_down) {
+            m_strings.pop_front();
+        }
+        return result;
+    }
+}
+
+eighties::event canvas::do_get_event(std::string& text, bool wait)
+{
+    std::unique_lock guard(m_guard);
+    if (wait) {
+        m_cond.wait(guard, [this]{ return !m_events.empty(); });
+    }
+    if (m_events.empty()) {
+        return eighties::event{};
+    } else {
+        auto result = m_events.front();
+        m_events.pop_front();
+        if (result.type == event_type::key_down) {
+            text = m_strings.front();
+            m_strings.pop_front();
+        } else {
+            text.clear();
+        }
         return result;
     }
 }
@@ -326,6 +350,7 @@ void canvas::keyPressEvent(QKeyEvent* event)
                           key_event{fromQModifiers(event->modifiers()),
                                     fromQKey(event->key()),
                                     static_cast<uint16_t>(event->nativeVirtualKey())});
+    m_strings.emplace_back(event->text().toStdString());
     m_cond.notify_one();
 }
 

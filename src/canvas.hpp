@@ -38,6 +38,7 @@ public:
     void do_draw_image(int x, int y, image const&);
     point do_current_cursor_position() const;
     eighties::event do_get_event(bool wait);
+    eighties::event do_get_event(std::string&, bool wait);
 
 public:
     QVariant inputMethodQuery(Qt::InputMethodQuery query) const override;
@@ -56,6 +57,7 @@ private:
     mutable std::mutex m_guard;
     std::condition_variable m_cond;
     std::deque<eighties::event> m_events;
+    std::deque<std::string> m_strings;
 };
 
 }

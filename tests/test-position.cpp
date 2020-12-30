@@ -27,13 +27,17 @@ int emain(int, char**)
             win.draw_image(pos.x - dino.width()/2, pos.y - dino.height()/2, dino);
             old_pos = pos;
         }
-        auto event = win.get_event(false);
+        std::string text;
+        auto event = win.get_event(text, false);
         switch (event.type) {
             case eighties::event_type::none:
                 break;
             case eighties::event_type::key_down:
             case eighties::event_type::key_up:
                 std::cout << (uint16_t)event.type << " " << std::hex << (uint16_t)event.key.key << " " << (uint16_t)event.key.modifiers << " " << event.key.scan << '\n';
+                if (!text.empty()) {
+                    std::cout << "   |" << text << "|\n";
+                }
                 break;
             case eighties::event_type::button_down:
             case eighties::event_type::button_wheel:

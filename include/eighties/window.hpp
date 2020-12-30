@@ -42,6 +42,7 @@ public:
     status_type status() const;
     point current_cursor_position() const;
     event get_event(bool wait = false);
+    event get_event(std::string& text, bool wait = false);
 
 private:
     std::unique_ptr<window_impl> m_impl;
