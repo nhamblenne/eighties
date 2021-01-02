@@ -1,0 +1,34 @@
+/**
+
+\mainpage eighties documentation
+
+\section Introduction
+
+eighties is a library which aims at getting the same ease of use for simple
+2D graphics as I got when I was learning programming in basic during the
+eighties.  Everything after was too complicated for my taste in at least
+two areas:
+
+- the setup needed
+
+- the need to redraw myself when the system asked me so.
+
+Performance is not an objective and if it is one of yours, you better find
+another library as, although I'll probably try to improve the performance
+when the API is stabilized, I'll not compromise the ease of use for better
+performance. However inefficient I'm here, I'll get better performance,
+more resolution, more colors than what I got in the past.
+
+\section Usage
+
+Instead of writing a `main` function, you write an `emain` one with the
+same `int argc, char** argv` prototype. eighties provide the main which
+will do the needed setup and launch your main in another thread (the
+initial thread is apparently special on Mac and will have to handle things
+eighties aim to isolate you from).
+
+You create an `eigthies::window` and then do whatever you want with it.
+In the test directory there are some examples to draw inspiration from
+until I complete the documentation and the features.
+
+*/
