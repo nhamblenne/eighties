@@ -15,8 +15,8 @@ set(CMAKE_DEBUG_POSTFIX _g)
 option(DevMode "Development mode" OFF)
 option(TEST_EIGHTIES "Testing eighties" OFF)
 
-string(REGEX REPLACE "(.*)/[^/]*" "\\1" DEV_ROOT "${PROJECT_SOURCE_DIR}")
 if(DevMode)
+    string(REGEX REPLACE "(.*)/[^/]*" "\\1" DEV_ROOT "${PROJECT_SOURCE_DIR}")
     set(CMAKE_INSTALL_PREFIX "${DEV_ROOT}")
     include(cmake/CompilerWarnings.cmake)
 else()
@@ -29,7 +29,6 @@ endif()
 list(INSERT CMAKE_PREFIX_PATH 0 "${CMAKE_INSTALL_PREFIX}")
 
 find_package(Threads)
-
 find_package(Qt5Widgets)
 
 add_subdirectory(src)
