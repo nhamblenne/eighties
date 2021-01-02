@@ -1,0 +1,5 @@
+<map id="eighties::event" name="eighties::event">
+<area shape="rect" id="node1" title=" " alt="" coords="110,95,217,121"/>
+<area shape="rect" id="node2" href="$structeighties_1_1button__event.html" title="describe a button event" alt="" coords="5,5,156,32"/>
+<area shape="rect" id="node3" href="$structeighties_1_1key__event.html" title="describe a key event" alt="" coords="180,5,315,32"/>
+</map>

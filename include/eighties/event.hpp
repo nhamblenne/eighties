@@ -11,6 +11,7 @@
 
 namespace eighties {
 
+/// gives the various keys
 enum class key_t: uint16_t {
     space             = 0x20,
     exclamation       = 0x21,
@@ -139,6 +140,8 @@ enum class key_t: uint16_t {
     unknown = 0xFFFF
 };
 
+/// gives the modifiers which can be pressed at the same time as a key or
+/// mouse button.
 enum class modifiers_t: uint16_t {
     none    = 0x0000,
     shift   = 0x0001,
@@ -146,28 +149,38 @@ enum class modifiers_t: uint16_t {
     alt     = 0x0004,
     meta    = 0x0008
 };
+
+/// combine two modifiers.
 inline modifiers_t& operator|=(modifiers_t& left, modifiers_t right)
 {
     left = modifiers_t((uint16_t)left | (uint16_t)right);
     return left;
 }
 
+/// gives the various event types.
 enum class event_type: uint16_t {
-    none, key_down, key_up, button_down, button_wheel, button_up
+    none, ///< no event
+    key_down, ///< a key press
+    key_up, ///< a key release
+    button_down, ///< a mouse button press
+    button_wheel, ///< a mouse wheel, note that wheel correspond to buttons 4, 5, 6 and 7
+    button_up ///< a mouse button release
 };
 
+/// describe a key event
 struct key_event {
-    modifiers_t modifiers;
-    key_t key;
-    uint16_t scan;
+    modifiers_t modifiers; ///< the modifiers pressed at the same time as the key
+    key_t key; ///< the key
+    uint16_t scan; ///< the scan code from the system
 };
 
+/// describe a button event
 struct button_event {
-    modifiers_t modifiers;
-    uint16_t modified_button;
-    uint16_t pressed_buttons;
-    int32_t x;
-    int32_t y;
+    modifiers_t modifiers; ///< the modifiers pressed at the same time as the button
+    uint16_t modified_button; ///< the button whose status change triggered the event
+    uint16_t pressed_buttons; ///< all the buttons pressed
+    int32_t x; ///< x position of the mouse
+    int32_t y; ///< y position of the mouse
 };
 
 struct event
@@ -178,8 +191,8 @@ struct event
 
     event_type type;
     union {
-        key_event key;
-        button_event button;
+        key_event key; ///< valid when type is key_down or key_up
+        button_event button; ///< valid when type is button_down, button_wheel, button_up
     };
 };
 

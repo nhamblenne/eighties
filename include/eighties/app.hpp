@@ -9,6 +9,8 @@
 
 namespace eighties {
 
+/// initialize eighties and call wrapped.  Arguments used by
+/// eighties are removed and not passed to wrapped.
 int main(int argc, char* argv[], int (*wrapped)(int, char**));
 
 }

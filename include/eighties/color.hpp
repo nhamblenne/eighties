@@ -11,6 +11,7 @@
 
 namespace eighties {
 
+/// describe a color in RGBA format.
 struct color
 {
     constexpr color(uint8_t pr, uint8_t pg, uint8_t pb, uint8_t pa = 255)

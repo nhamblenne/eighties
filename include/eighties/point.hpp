@@ -9,6 +9,7 @@
 
 namespace eighties {
 
+/// describe a position
 class point
 {
 public:
@@ -22,11 +23,13 @@ public:
     int y;
 };
 
+/// compare two points for equality
 constexpr bool operator==(point l, point r)
 {
     return l.x == r.x && l.y == r.y;
 }
 
+/// compare two points for inequality
 constexpr bool operator!=(point l, point r)
 {
     return !(l == r);
