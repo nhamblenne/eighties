@@ -195,6 +195,7 @@ image window::get_image() const
 void window_impl::closeEvent(QCloseEvent* event)
 {
     event->accept();
+    m_canvas->close();
     std::unique_lock guard(m_guard);
     m_is_closed = true;
     m_cond.notify_all();

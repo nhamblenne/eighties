@@ -164,7 +164,8 @@ enum class event_type: uint16_t {
     key_up, ///< a key release
     button_down, ///< a mouse button press
     button_wheel, ///< a mouse wheel, note that wheel correspond to buttons 4, 5, 6 and 7
-    button_up ///< a mouse button release
+    button_up, ///< a mouse button release
+    close ///< window is now closed
 };
 
 /// describe a key event
@@ -186,6 +187,7 @@ struct button_event {
 struct event
 {
     event() : type(event_type::none) {}
+    event(event_type p_type) : type{p_type} {}
     event(event_type p_type, key_event p_key) : type{p_type}, key{p_key} {}
     event(event_type p_type, button_event p_button) : type{p_type}, button{p_button} {}
 

@@ -52,11 +52,13 @@ protected:
     void mousePressEvent(QMouseEvent* event) override;
     void mouseReleaseEvent(QMouseEvent* event) override;
     void wheelEvent(QWheelEvent* event) override;
+    void closeEvent(QCloseEvent* event) override;
 
 private:
     QImage m_content;
     mutable std::mutex m_guard;
     std::condition_variable m_cond;
+    bool m_closed{false};
     std::deque<eighties::event> m_events;
     std::deque<std::string> m_strings;
 };

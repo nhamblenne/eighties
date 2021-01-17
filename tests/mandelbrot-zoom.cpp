@@ -57,6 +57,9 @@ int emain(int, char*[])
         eighties::point old_pt{-1, -1};
         for (;;) {
             auto ev = win.get_event(!zooming);
+            if (win.status() == eighties::window::closed) {
+                return 0;
+            }
             if (ev.type == eighties::event_type::key_down) {
                 if (ev.key.key == eighties::key_t::escape) {
                     win.close();

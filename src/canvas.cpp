@@ -276,7 +276,7 @@ eighties::event canvas::do_get_event(bool wait)
 {
     std::unique_lock guard(m_guard);
     if (wait) {
-        m_cond.wait(guard, [this]{ return !m_events.empty(); });
+        m_cond.wait(guard, [this]{ return !m_events.empty() || m_closed; });
     }
     if (m_events.empty()) {
         return eighties::event{};
@@ -294,7 +294,7 @@ eighties::event canvas::do_get_event(std::string& text, bool wait)
 {
     std::unique_lock guard(m_guard);
     if (wait) {
-        m_cond.wait(guard, [this]{ return !m_events.empty(); });
+        m_cond.wait(guard, [this]{ return !m_events.empty() || m_closed; });
     }
     if (m_events.empty()) {
         return eighties::event{};
@@ -389,6 +389,14 @@ void canvas::wheelEvent(QWheelEvent* event)
                                        fromAngleDelta(event->angleDelta()),
                                        fromQButtons(event->buttons()),
                                        event->x(), event->y()});
+    m_cond.notify_one();
+}
+
+void canvas::closeEvent(QCloseEvent*)
+{
+    std::unique_lock guard(m_guard);
+    m_events.emplace_back(event_type::close);
+    m_closed = true;
     m_cond.notify_one();
 }
 
