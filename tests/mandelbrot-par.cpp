@@ -46,7 +46,6 @@ void mandelbrot(double xmin, double ymin, double xmax, double ymax)
                                                c % 16 * 16));
         }
     }
-    win.wait_for_close();
 }
 
 void alt_mandelbrot(double xmin, double ymin, double xmax, double ymax)
@@ -101,7 +100,6 @@ void alt_mandelbrot(double xmin, double ymin, double xmax, double ymax)
                                           cur_c / 16 % 16 * 16,
                                           cur_c / 16 / 16 * 16));
     }
-    win.wait_for_close();
 }
 
 int emain(int, char*[])

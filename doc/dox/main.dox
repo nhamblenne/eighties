@@ -9,26 +9,25 @@ eighties is a library which aims at getting the same ease of use for simple
 eighties.  Everything after was too complicated for my taste in at least
 two areas:
 
-- the setup needed
+- too much setup needed is needed for simple things,
 
-- the need to redraw myself when the system asked me so.
+- one need to be able to redraw when the system ask so.
 
 Performance is not an objective and if it is one of yours, you better find
 another library as, although I'll probably try to improve the performance
 when the API is stabilized, I'll not compromise the ease of use for better
 performance. However inefficient I'm here, I'll get better performance,
-more resolution, more colors than what I got in the past.
+more resolution, more colors than what I got in the past and that's enough
+for me.
 
 \section Usage
 
-Instead of writing a `main` function, you write an `emain` one with the
-same `int argc, char** argv` prototype. eighties provide the main which
-will do the needed setup and launch your main in another thread (the
-initial thread is apparently special on Mac and will have to handle things
-eighties aim to isolate you from).
+\subsection Initialization
 
-You create an `eigthies::window` and then do whatever you want with it.
-In the test directory there are some examples to draw inspiration from
-until I complete the documentation and the features.
+The easiest way is to have an `emain` function instead of a `main` one as
+entry point. eighties will then provide its own `main` function which will
+call your `emain` one in its own thread. The reason is that some platforms
+(Mac IIRC) apparently demands that the graphical event handling loop is in
+the main thread.
 
 */

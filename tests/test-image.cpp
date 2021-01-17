@@ -6,9 +6,11 @@
 
 #include "eighties/window.hpp"
 #include <eighties/image.hpp>
-
-#include <unistd.h>
 #include <eighties/color.hpp>
+#include <chrono>
+#include <thread>
+
+using namespace std::chrono_literals;
 
 int emain(int, char**)
 {
@@ -22,7 +24,7 @@ int emain(int, char**)
         win.draw_line(20, 60, 500, 60, eighties::color::red);
         win.draw_line(20, 80, 500, 80, eighties::color::red);
         win.draw_image(i, 20, dino);
-        sleep(1);
+        std::this_thread::sleep_for(1s);
     }
 
     win.draw_image(200, 200, dino);
@@ -31,6 +33,5 @@ int emain(int, char**)
     win.draw_line(199, 199+dino.height()+1, 199+dino.width()+1, 199+dino.height()+1, eighties::color::red);
     win.draw_line(199+dino.width()+1, 199,  199+dino.width()+1, 199+dino.height()+1, eighties::color::red);
 
-    win.wait_for_close();
     return 0;
 }

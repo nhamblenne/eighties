@@ -26,6 +26,5 @@ int emain(int argc, char* argv[])
     for (int i = 0; i < 30; ++i) {
         winT.draw_line(0, i, 200, i, eighties::color::blue);
     }
-    winT.wait_for_close();
     return 0;
 }
