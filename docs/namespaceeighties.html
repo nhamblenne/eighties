@@ -261,7 +261,8 @@ Enumerations</h2></td></tr>
 <a class="el" href="namespaceeighties.html#a179126cc0af374ec19b33a03115a4bf0a047c9f390ce8be9892c88060499a7b2f">event_type::button_down</a>, 
 <br />
 &#160;&#160;<a class="el" href="namespaceeighties.html#a179126cc0af374ec19b33a03115a4bf0af5ab4fe9101e066085e4f279e62c9e64">event_type::button_wheel</a>, 
-<a class="el" href="namespaceeighties.html#a179126cc0af374ec19b33a03115a4bf0ad87769d2964dec6dc94e68118cb00d42">event_type::button_up</a>
+<a class="el" href="namespaceeighties.html#a179126cc0af374ec19b33a03115a4bf0ad87769d2964dec6dc94e68118cb00d42">event_type::button_up</a>, 
+<a class="el" href="namespaceeighties.html#a179126cc0af374ec19b33a03115a4bf0a716f6b30598ba30945d84485e61c1027">event_type::close</a>
 <br />
  }</td></tr>
 <tr class="memdesc:a179126cc0af374ec19b33a03115a4bf0"><td class="mdescLeft">&#160;</td><td class="mdescRight">gives the various event types.  <a href="namespaceeighties.html#a179126cc0af374ec19b33a03115a4bf0">More...</a><br /></td></tr>
@@ -315,6 +316,8 @@ Functions</h2></td></tr>
 <tr><td class="fieldname"><a id="a179126cc0af374ec19b33a03115a4bf0af5ab4fe9101e066085e4f279e62c9e64"></a>button_wheel&#160;</td><td class="fielddoc"><p>a mouse wheel, note that wheel correspond to buttons 4, 5, 6 and 7 </p>
 </td></tr>
 <tr><td class="fieldname"><a id="a179126cc0af374ec19b33a03115a4bf0ad87769d2964dec6dc94e68118cb00d42"></a>button_up&#160;</td><td class="fielddoc"><p>a mouse button release </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a179126cc0af374ec19b33a03115a4bf0a716f6b30598ba30945d84485e61c1027"></a>close&#160;</td><td class="fielddoc"><p>window is now closed </p>
 </td></tr>
 </table>
 
@@ -530,7 +533,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>initialize eighties and call wrapped. Arguments used by eighties are removed and not passed to wrapped. </p>
+<p>initialize eighties and call wrapped. Arguments used by eighties are removed and not passed to wrapped. wrapped is called in another thead as some systems limit handling some things that eighties has to do to the main thead. This function is usually not needed as the usual way of writing an eighties program is to provide an <code>emain</code> instead of a <code>main</code>. </p>
 
 </div>
 </div>

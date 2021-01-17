@@ -69,14 +69,15 @@ $(function() {
 Introduction</h1>
 <p>eighties is a library which aims at getting the same ease of use for simple 2D graphics as I got when I was learning programming in basic during the eighties. Everything after was too complicated for my taste in at least two areas:</p>
 <ul>
-<li>the setup needed</li>
-<li>the need to redraw myself when the system asked me so.</li>
+<li>too much setup needed is needed for simple things,</li>
+<li>one need to be able to redraw when the system ask so.</li>
 </ul>
-<p>Performance is not an objective and if it is one of yours, you better find another library as, although I'll probably try to improve the performance when the API is stabilized, I'll not compromise the ease of use for better performance. However inefficient I'm here, I'll get better performance, more resolution, more colors than what I got in the past.</p>
+<p>Performance is not an objective and if it is one of yours, you better find another library as, although I'll probably try to improve the performance when the API is stabilized, I'll not compromise the ease of use for better performance. However inefficient I'm here, I'll get better performance, more resolution, more colors than what I got in the past and that's enough for me.</p>
 <h1><a class="anchor" id="Usage"></a>
 Usage</h1>
-<p>Instead of writing a <code>main</code> function, you write an <code>emain</code> one with the same <code>int argc, char** argv</code> prototype. eighties provide the main which will do the needed setup and launch your main in another thread (the initial thread is apparently special on Mac and will have to handle things eighties aim to isolate you from).</p>
-<p>You create an <code>eigthies::window</code> and then do whatever you want with it. In the test directory there are some examples to draw inspiration from until I complete the documentation and the features. </p>
+<h2><a class="anchor" id="Initialization"></a>
+Initialization</h2>
+<p>The easiest way is to have an <code>emain</code> function instead of a <code>main</code> one as entry point. eighties will then provide its own <code>main</code> function which will call your <code>emain</code> one in its own thread. The reason is that some platforms (Mac IIRC) apparently demands that the graphical event handling loop is in the main thread. </p>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->
